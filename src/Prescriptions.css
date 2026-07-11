@@ -1,0 +1,141 @@
+@import './Dashboard.css';
+
+.background-gray {
+  background-color: #f4f7fa;
+}
+
+.prescription-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px;
+}
+
+.title-and-patient h1 { color: #0a1f44; margin: 0; font-size: 28px; }
+.title-and-patient p { color: #666; margin: 8px 0 0 0; font-size: 15px; }
+
+.history-btn {
+  background: white;
+  border: 1px solid #cdd4df;
+  padding: 10px 20px;
+  border-radius: 8px;
+  color: #0a1f44;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.prescription-content-area {
+  padding: 0 30px 30px 30px;
+}
+
+/* ورقة الوصفة (البطاقة البيضاء الكبيرة) */
+.prescription-paper {
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  margin-bottom: 25px;
+}
+
+/* ترويسة الطبيب داخل الورقة */
+.doctor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px dashed #e2e8f0;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.doctor-info h2 { margin: 0; color: #0a1f44; font-size: 20px; }
+.doctor-info p { margin: 5px 0 0 0; color: #666; font-size: 14px; }
+
+.small-logo { width: 50px; }
+
+.prescription-meta { text-align: left; color: #888; font-size: 13px; line-height: 1.6; }
+
+/* قسم الأدوية */
+.section-title { color: #0a1f44; margin-bottom: 20px; font-size: 18px; }
+
+.medication-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 100px; /* تقسيم المسافات للحقول */
+  gap: 15px;
+  background: #fcfdfd;
+  padding: 20px;
+  border: 1px solid #edf2f7;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.form-group { display: flex; flex-direction: column; }
+.form-group label { margin-bottom: 8px; color: #555; font-size: 13px; font-weight: bold; }
+.form-group input, .form-group select {
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+}
+
+.duration-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.duration-input input { width: 60px; text-align: center; }
+.duration-input span { color: #666; font-size: 14px; }
+
+.add-med-btn {
+  background: transparent;
+  border: none;
+  color: #00bfa5;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px 0;
+  font-size: 15px;
+  display: block;
+}
+
+/* قسم الملاحظات */
+.notes-section { margin-top: 30px; border-top: 1px solid #edf2f7; padding-top: 20px; }
+.notes-section label { display: block; margin-bottom: 10px; color: #555; font-weight: bold; }
+.notes-section textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  resize: vertical;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+/* الأزرار السفلية */
+.action-buttons-container {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start; /* الأزرار على اليمين */
+}
+
+.save-print-btn {
+  background-color: #00bfa5;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background-color: white;
+  color: #555;
+  border: 1px solid #cbd5e1;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}

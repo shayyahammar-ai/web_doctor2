@@ -1,0 +1,126 @@
+@import './Dashboard.css';
+
+/* إزالة الحواف الداخلية للمحتوى الرئيسي ليمتد تطبيق الرسائل بالكامل */
+.chat-main-wrapper {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: #f8fafc;
+}
+
+.chat-global-header {
+  border-bottom: 1px solid #edf2f7;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-right: 20px;
+}
+.header-avatar { width: 40px; height: 40px; border-radius: 50%; }
+
+/* حاوية التطبيق المقسمة لجزئين */
+.messages-app-container {
+  display: flex;
+  flex: 1;
+  overflow: hidden; /* لمنع ظهور سكرول إضافي */
+}
+
+/* 1. قائمة جهات الاتصال */
+.contacts-sidebar {
+  width: 350px;
+  background: white;
+  border-left: 1px solid #edf2f7;
+  display: flex;
+  flex-direction: column;
+}
+
+.contacts-search { padding: 20px; }
+.contacts-search input {
+  width: 100%; padding: 12px 15px; border-radius: 20px; border: 1px solid #ddd; outline: none; box-sizing: border-box; background: #f9f9f9;
+}
+
+.contacts-filters {
+  display: flex; gap: 10px; padding: 0 20px 15px 20px; border-bottom: 1px solid #edf2f7;
+}
+.filter-btn {
+  padding: 8px 15px; border: 1px solid #ddd; border-radius: 20px; background: white; color: #555; cursor: pointer; font-size: 13px;
+}
+.filter-btn.active { background: #0a1f44; color: white; border-color: #0a1f44; }
+
+.contacts-list {
+  flex: 1; overflow-y: auto;
+}
+
+.contact-item {
+  display: flex; gap: 15px; padding: 20px; border-bottom: 1px solid #f9f9f9; cursor: pointer; transition: 0.2s;
+}
+.contact-item:hover { background: #f4f7fa; }
+.contact-item.active-chat { background: #f4f7fa; border-right: 4px solid #00bfa5; }
+
+.contact-avatar-wrapper { position: relative; }
+.emoji-avatar { font-size: 40px; display: inline-block; background: #eef2f6; border-radius: 50%; width: 50px; height: 50px; text-align: center; line-height: 55px; }
+.text-avatar { width: 50px; height: 50px; background: #e0f2f1; color: #00796b; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: bold; }
+.online-dot-small { position: absolute; bottom: 2px; right: 2px; width: 12px; height: 12px; background: #00e676; border: 2px solid white; border-radius: 50%; }
+
+.contact-info { flex: 1; }
+.contact-name-time { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.contact-name-time h4 { margin: 0; color: #0a1f44; font-size: 15px; }
+.msg-time { font-size: 12px; color: #888; }
+
+.contact-last-msg { display: flex; justify-content: space-between; align-items: center; }
+.contact-last-msg p { margin: 0; color: #666; font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 200px; }
+.unread-badge { background: #d32f2f; color: white; font-size: 11px; font-weight: bold; padding: 2px 6px; border-radius: 10px; }
+
+/* 2. نافذة المحادثة */
+.chat-window {
+  flex: 1; display: flex; flex-direction: column; background: #fafcff;
+}
+
+.chat-header {
+  display: flex; justify-content: space-between; align-items: center; padding: 20px 30px; border-bottom: 1px solid #edf2f7; background: white;
+}
+.chat-user-info { display: flex; align-items: center; gap: 15px; }
+.large-avatar { width: 55px; height: 55px; line-height: 60px; font-size: 45px; }
+.chat-user-info h3 { margin: 0 0 5px 0; color: #0a1f44; }
+.online-status { color: #00bfa5; font-size: 13px; display: flex; align-items: center; gap: 5px; }
+.online-status .dot { width: 8px; height: 8px; background: #00bfa5; border-radius: 50%; }
+
+.chat-actions { display: flex; gap: 15px; }
+.action-icon { background: transparent; border: none; font-size: 20px; color: #555; cursor: pointer; }
+
+/* منطقة الرسائل */
+.chat-messages-area {
+  flex: 1; padding: 30px; overflow-y: auto; display: flex; flex-direction: column; gap: 20px;
+}
+
+.date-divider { text-align: center; margin-bottom: 10px; }
+.date-divider span { background: #eef2f6; color: #666; font-size: 12px; padding: 5px 15px; border-radius: 15px; }
+
+.message-wrapper { display: flex; gap: 15px; max-width: 70%; }
+.msg-avatar { font-size: 35px; }
+
+/* رسائل المريض (اليمين بصرياً) */
+.msg-them { align-self: flex-start; }
+.msg-them .message-bubble { background: #eef2f6; color: #333; border-radius: 15px 15px 0 15px; padding: 15px; }
+
+/* رسائل الطبيب (اليسار بصرياً) */
+.msg-me { align-self: flex-end; justify-content: flex-end; }
+.msg-me .message-bubble { background: #0a1f44; color: white; border-radius: 15px 15px 15px 0; padding: 15px; }
+
+.message-time { font-size: 11px; color: #888; display: block; margin-top: 5px; }
+.msg-me .message-time { text-align: left; }
+.read-tick { color: #00bfa5; margin-left: 3px; }
+
+/* منطقة الكتابة */
+.chat-input-area {
+  padding: 20px 30px; background: white; border-top: 1px solid #edf2f7; display: flex; align-items: center; gap: 15px;
+}
+
+.chat-input-area input {
+  flex: 1; padding: 15px; border: 1px solid #ddd; border-radius: 25px; outline: none; background: #f9f9f9;
+}
+
+.icon-btn { background: transparent; border: none; font-size: 20px; color: #555; cursor: pointer; }
+.send-btn { background: #00796b; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; justify-content: center; align-items: center; }

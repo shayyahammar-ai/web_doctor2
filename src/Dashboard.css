@@ -1,0 +1,97 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7fa; /* لون الخلفية العام */
+}
+
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+}
+
+/* تنسيق القائمة الجانبية */
+.sidebar {
+  width: 250px;
+  background-color: #002244; /* اللون الكحلي الغامق من صورتك */
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  text-align: center;
+  padding: 30px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.dash-logo { width: 60px; background: white; border-radius: 50%; padding: 5px; }
+
+.sidebar-nav ul { list-style: none; padding: 0; margin: 20px 0; }
+
+.sidebar-nav li {
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.sidebar-nav li:hover, .sidebar-nav li.active {
+  background-color: #004d40; /* اللون الفيروزي عند التحديد */
+  border-right: 4px solid #00bfa5;
+}
+
+/* تنسيق المحتوى الرئيسي */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+/* الشريط العلوي */
+.top-header {
+  background-color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.header-right { display: flex; align-items: center; gap: 20px; }
+.search-box input {
+  padding: 10px 15px; border-radius: 20px; border: 1px solid #ddd; width: 250px;
+}
+
+.add-appointment-btn {
+  background-color: #004d40;
+  color: white; padding: 10px 20px; border-radius: 8px; border: none; cursor: pointer;
+}
+
+/* مساحة المحتوى الداخلية */
+.dashboard-content {
+  padding: 30px;
+}
+
+.welcome-section h1 { color: #0a1f44; margin-bottom: 5px; }
+.welcome-section p { color: #666; margin-top: 0; margin-bottom: 30px; }
+
+/* بطاقات الإحصائيات */
+.stats-cards {
+  display: flex;
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  flex: 1;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  text-align: left; /* بسبب الـ RTL سنجعلها يمين لاحقاً في الترتيب الدقيق */
+}
+
+.card h4 { color: #666; margin: 0 0 10px 0; font-size: 14px; }
+.card h2 { color: #0a1f44; margin: 0; font-size: 32px; }
+
+.urgent-card { border: 1px solid #ffebee; }
+.urgent-text { color: #d32f2f !important; }

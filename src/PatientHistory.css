@@ -1,0 +1,131 @@
+@import './Dashboard.css';
+
+.background-gray {
+  background-color: #f8fafc;
+}
+
+.patient-content-area {
+  padding: 30px;
+}
+
+/* البطاقات العلوية */
+.top-cards-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.info-card {
+  background: white;
+  border-radius: 15px;
+  padding: 25px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+}
+
+.patient-main-info {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name-status {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.name-status h2 { color: #0a1f44; margin: 0; font-size: 24px; }
+.status-badge.stable { background: #e0f2f1; color: #00796b; padding: 5px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; }
+
+.patient-meta { display: flex; gap: 20px; color: #666; font-size: 14px; }
+
+.patient-avatar-large img { width: 90px; height: 90px; border-radius: 15px; object-fit: cover; }
+
+.vitals-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.vitals-header h3 { color: #0a1f44; margin: 0 0 15px 0; font-size: 16px; line-height: 1.4; }
+
+.vitals-data { display: flex; justify-content: space-between; }
+.vital-item { text-align: center; }
+.vital-label { display: block; color: #888; font-size: 13px; margin-bottom: 5px; }
+.vital-value { display: block; color: #0a1f44; font-size: 18px; font-weight: bold; }
+
+/* الخط الزمني (Timeline) */
+.timeline-container {
+  position: relative;
+  padding-right: 50px; /* مساحة للخط الجانبي */
+}
+
+/* الخط العمودي للتايم لاين */
+.timeline-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 25px;
+  bottom: 0;
+  width: 2px;
+  background-color: #e0e0e0;
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+  width: 80%;
+}
+
+/* تنسيق خاص للبطاقة التي تظهر على اليسار في التصميم (الأمراض المزمنة) */
+.timeline-item.alt-layout {
+  margin-right: auto;
+  margin-left: 0;
+}
+
+.timeline-card {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.timeline-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.timeline-header h4 { margin: 0; font-size: 18px; color: #0a1f44; }
+.timeline-header h4.red-text { color: #d32f2f; }
+.timeline-date { color: #888; font-size: 13px; }
+
+.timeline-card p { color: #555; line-height: 1.6; margin-bottom: 20px; font-size: 15px; }
+
+.doctor-name { color: #00796b; font-size: 13px; font-weight: bold; }
+
+/* أيقونات الخط الزمني */
+.timeline-icon {
+  position: absolute;
+  top: 20px;
+  right: -66px; /* ضبط المكان فوق الخط العمودي */
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  z-index: 2;
+  border: 4px solid #f8fafc;
+}
+
+.green-icon { background-color: #00796b; }
+.red-icon { background-color: #d32f2f; }
+.blue-icon { background-color: #0a1f44; }

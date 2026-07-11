@@ -1,0 +1,222 @@
+@import './Dashboard.css';
+
+.background-gray {
+  background-color: #f4f7fa;
+}
+
+.lab-content-area {
+  padding: 30px;
+}
+
+/* بطاقة المريض العلوية */
+.patient-summary-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  margin-bottom: 30px;
+}
+
+.patient-details-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.patient-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.patient-info-text h3 {
+  margin: 0 0 10px 0;
+  color: #0a1f44;
+  font-size: 20px;
+}
+
+.patient-meta-info {
+  display: flex;
+  gap: 15px;
+  color: #666;
+  font-size: 13px;
+}
+
+.patient-details-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.status-badge.stable {
+  background-color: #e0f2f1;
+  color: #00796b;
+  padding: 6px 15px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.visit-date {
+  color: #888;
+  font-size: 13px;
+}
+
+/* عناوين القسم */
+.section-title-container {
+  margin-bottom: 20px;
+  text-align: right;
+}
+
+.section-title-container h3 { margin: 0 0 5px 0; color: #0a1f44; font-size: 20px; }
+.section-title-container p { margin: 0; color: #666; font-size: 14px; }
+
+/* شبكة الفحوصات المقسمة لعمودين */
+.lab-tests-grid {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.tests-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.column-title {
+  margin: 0;
+  color: #0a1f44;
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+/* بطاقات الفئات (مثل تحاليل الدم) */
+.test-category-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #edf2f7;
+}
+
+.category-title {
+  margin: 0 0 20px 0;
+  color: #333;
+  font-size: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 10px;
+}
+
+/* عناصر حقول الاختيار (Checkboxes) */
+.test-checkbox-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #f9f9f9;
+  cursor: pointer;
+}
+
+.test-checkbox-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.test-name {
+  display: flex;
+  flex-direction: column;
+}
+
+.test-name span { color: #333; font-weight: bold; font-size: 14px; margin-bottom: 3px; }
+.test-name small { color: #888; font-size: 12px; }
+
+.test-checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: #00bfa5;
+  cursor: pointer;
+}
+
+/* قسم الملاحظات والأولوية */
+.clinical-notes-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid #edf2f7;
+}
+
+.clinical-notes-card textarea {
+  width: 100%;
+  min-height: 100px;
+  padding: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  resize: vertical;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.priority-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.priority-section strong { color: #333; font-size: 14px; }
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.urgent-priority { color: #d32f2f; font-weight: bold; }
+.normal-priority { color: #00796b; font-weight: bold; }
+
+.radio-item input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: currentColor;
+  cursor: pointer;
+}
+
+/* الأزرار السفلية */
+.lab-action-buttons {
+  display: flex;
+  gap: 15px;
+}
+
+.submit-lab-btn {
+  background-color: #00796b;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.cancel-lab-btn {
+  background-color: white;
+  color: #0a1f44;
+  border: 1px solid #cbd5e1;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
