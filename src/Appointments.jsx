@@ -26,7 +26,7 @@ function Appointments() {
             {/* استخدام Link للتنقل بدون إعادة تحميل الصفحة */}
             <li><Link to="/dashboard">لوحة القيادة</Link></li>
             <li className="active"><Link to="/appointments">المواعيد</Link></li>
-            <li><Link to="/patients">المرضى</Link></li>
+            <li><Link to="/patient-history">المرضى</Link></li>
             <li><Link to="/records">السجل الطبي</Link></li>
             <li><Link to="/prescriptions">الوصفات</Link></li>
             <li><Link to="/lab">المختبر</Link></li>
