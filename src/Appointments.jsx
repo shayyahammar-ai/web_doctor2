@@ -1,15 +1,81 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Appointments.css';
 
 function Appointments() {
-  // بيانات وهمية مؤقتة لملء الجدول ريثما يتم الربط
-  const patientsData = [
-    { id: '#P-10024', name: 'أحمد محمود', time: '10:30 صباحاً', type: 'استشارة عامة', status: 'جاري الفحص', statusType: 'active', avatar: '👨🏻‍🦱' },
-    { id: '#P-10055', name: 'سارة عبد الرحمن', time: '11:00 صباحاً', type: 'متابعة تحاليل', status: 'قيد الانتظار', statusType: 'waiting', avatar: 'س' },
-    { id: '#P-09982', name: 'فاطمة علي', time: '11:30 صباحاً', type: 'فحص دوري', status: 'قيد الانتظار', statusType: 'waiting', avatar: '🧕🏻' },
-    { id: '#P-10101', name: 'محمد يوسف', time: '09:00 صباحاً', type: 'ألم في المعدة', status: 'انتهت', statusType: 'done', avatar: 'م' },
-  ];
+  // الحالات التفاعلية
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('all'); // all, scheduled, arrived, completed, no_show
+  const [stats, setStats] = useState({
+    total_today_patients: 0,
+    counts_by_status: { scheduled: 0, arrived: 0, completed: 0, no_show: 0 }
+  });
+  const [appointmentsData, setAppointmentsData] = useState({
+    scheduled: [],
+    arrived: [],
+    completed: [],
+    no_show: []
+  });
+
+  // جلب البيانات من الـ API عند فتح الصفحة
+  useEffect(() => {
+    fetchAppointments();
+  }, []);
+
+  const fetchAppointments = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('token'); // التوكن المحفوظ عند التسجيل
+
+      const response = await axios.get('http://127.0.0.1:8000/doctor/today-appointments', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+        },
+      });
+
+      if (response.data.status) {
+        setStats(response.data.statistics);
+        setAppointmentsData(response.data.data);
+      }
+    } catch (error) {
+      console.error('خطأ في جلب مواعيد اليوم:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // دالة لتجميع وقراءة القائمة بحسب التبويب النشط
+  const getDisplayedAppointments = () => {
+    if (activeTab === 'all') {
+      return [
+        ...(appointmentsData.scheduled || []),
+        ...(appointmentsData.arrived || []),
+        ...(appointmentsData.completed || []),
+        ...(appointmentsData.no_show || []),
+      ];
+    }
+    return appointmentsData[activeTab] || [];
+  };
+
+  // دالة لتحديد شكل ونوع الحالة (Badge Color & Text)
+  const renderStatusBadge = (statusType) => {
+    switch (statusType) {
+      case 'arrived':
+        return <span className="status-badge active"><span className="dot"></span> جاري الفحص</span>;
+      case 'scheduled':
+        return <span className="status-badge waiting"><span className="dot"></span> قيد الانتظار</span>;
+      case 'completed':
+        return <span className="status-badge done"><span className="dot"></span> انتهت</span>;
+      case 'no_show':
+        return <span className="status-badge noshow"><span className="dot"></span> لم يحضر</span>;
+      default:
+        return <span className="status-badge">{statusType}</span>;
+    }
+  };
+
+  const currentList = getDisplayedAppointments();
 
   return (
     <div className="dashboard-layout" dir="rtl">
@@ -23,7 +89,6 @@ function Appointments() {
         </div>
         <nav className="sidebar-nav">
           <ul>
-            {/* استخدام Link للتنقل بدون إعادة تحميل الصفحة */}
             <li><Link to="/dashboard">لوحة القيادة</Link></li>
             <li className="active"><Link to="/appointments">المواعيد</Link></li>
             <li><Link to="/patient-history">المرضى</Link></li>
@@ -36,14 +101,14 @@ function Appointments() {
         </nav>
       </aside>
 
-      {/* المحتوى الرئيسي لصفحة المواعيد */}
+      {/* المحتوى الرئيسي */}
       <main className="main-content">
         
-        {/* الترويسة (Header) الخاصة بالمواعيد */}
+        {/* الترويسة */}
         <header className="appointments-header">
           <div className="header-title">
             <h1>مرضى اليوم</h1>
-            <p>12 مريض مجدول لهذا اليوم</p>
+            <p>{stats.total_today_patients} مريض مجدول لهذا اليوم</p>
           </div>
           <div className="header-actions">
             <div className="search-box">
@@ -53,61 +118,89 @@ function Appointments() {
           </div>
         </header>
 
-        {/* قسم التبويبات (Tabs) */}
+        {/* التبويبات المربوطة بالأعداد الحقيقية */}
         <div className="tabs-container">
           <ul className="tabs">
-            <li className="active">الكل (12)</li>
-            <li>قيد الانتظار (4)</li>
-            <li>جاري الفحص (1)</li>
-            <li>انتهت (7)</li>
+            <li 
+              className={activeTab === 'all' ? 'active' : ''} 
+              onClick={() => setActiveTab('all')}
+            >
+              الكل ({stats.total_today_patients})
+            </li>
+            <li 
+              className={activeTab === 'scheduled' ? 'active' : ''} 
+              onClick={() => setActiveTab('scheduled')}
+            >
+              قيد الانتظار ({stats.counts_by_status.scheduled})
+            </li>
+            <li 
+              className={activeTab === 'arrived' ? 'active' : ''} 
+              onClick={() => setActiveTab('arrived')}
+            >
+              جاري الفحص ({stats.counts_by_status.arrived})
+            </li>
+            <li 
+              className={activeTab === 'completed' ? 'active' : ''} 
+              onClick={() => setActiveTab('completed')}
+            >
+              انتهت ({stats.counts_by_status.completed})
+            </li>
           </ul>
         </div>
 
         {/* جدول المواعيد */}
         <div className="table-container">
-          <table className="appointments-table">
-            <thead>
-              <tr>
-                <th>المريض</th>
-                <th>الوقت</th>
-                <th>نوع الموعد</th>
-                <th>الحالة</th>
-                <th>إجراء</th>
-              </tr>
-            </thead>
-            <tbody>
-              {patientsData.map((patient, index) => (
-                <tr key={index}>
-                  <td className="patient-info">
-                    <div className="avatar-circle">{patient.avatar}</div>
-                    <div>
-                      <strong>{patient.name}</strong>
-                      <span>ID: {patient.id}</span>
-                    </div>
-                  </td>
-                  <td>{patient.time}</td>
-                  <td>{patient.type}</td>
-                  <td>
-                    <span className={`status-badge ${patient.statusType}`}>
-                      <span className="dot"></span> {patient.status}
-                    </span>
-                  </td>
-                  <td>
-                    <button className="action-btn">📁</button>
-                  </td>
+          {loading ? (
+            <div style={{ textAlign: 'center', padding: '40px' }}>جاري تحميل البيانات...</div>
+          ) : (
+            <table className="appointments-table">
+              <thead>
+                <tr>
+                  <th>المريض</th>
+                  <th>الوقت</th>
+                  <th>نوع الموعد</th>
+                  <th>الحالة</th>
+                  <th>إجراء</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {currentList.length > 0 ? (
+                  currentList.map((item, index) => (
+                    <tr key={item.id || index}>
+                      <td className="patient-info">
+                        <div className="avatar-circle">
+                          {item.patient?.name ? item.patient.name.charAt(0) : '👤'}
+                        </div>
+                        <div>
+                          <strong>{item.patient?.name || item.patient_name || 'مريض'}</strong>
+                          <span>ID: #P-{item.patient_id || item.id}</span>
+                        </div>
+                      </td>
+                      <td>{item.appointment_time || item.time || '--:--'}</td>
+                      <td>{item.appointment_type || item.type || 'استشارة'}</td>
+                      <td>{renderStatusBadge(item.status || activeTab)}</td>
+                      <td>
+                        <button className="action-btn">📁</button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" style={{ textAlign: 'center', padding: '30px' }}>
+                      لا توجد مواعيد في هذا القسم اليوم.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          )}
 
-          {/* الترقيم (Pagination) */}
+          {/* الترقيم */}
           <div className="pagination">
-            <span>عرض 1 إلى 4 من 12</span>
+            <span>عرض {currentList.length} من {stats.total_today_patients}</span>
             <div className="page-numbers">
               <button className="page-btn">❯</button>
               <button className="page-btn active">1</button>
-              <button className="page-btn">2</button>
-              <button className="page-btn">3</button>
               <button className="page-btn">❮</button>
             </div>
           </div>

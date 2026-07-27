@@ -14,10 +14,20 @@ const navigate = useNavigate(); // <-- 2. السطر الناقص الثاني �
       const response = await axios.post('https://api-shayyah.abukm.com/api/login', formData);
       
       console.log("تم بنجاح:", response.data);
-      alert("أهلاً بك يا دكتور!");
-      navigate('/dashboard');
-      // هنا سنقوم لاحقاً بتخزين الـ Token والتحويل لصفحة الداشبورد
+     const token = response.data.Token || response.data.access_token || response.data.data?.token || response.data.authorisation?.token;
+
+      if (token) {
+        // 2. حفظ التوكن في ذاكرة المتصفح
+        localStorage.setItem('token', token);
+        alert("أهلاً بك يا دكتور!");
+        navigate('/dashboard');
+      } else {
+        console.error("لم يتم العثور على token في استجابة السيرفر:", response.data);
+        alert("حدث خطأ في استلام مفتاح الدخول (Token)");
+      }
+
     } catch (err) {
+      console.error(err);
       alert("البريد أو كلمة المرور غير صحيحة");
       setError("البريد أو كلمة المرور غير صحيحة");
     }
@@ -66,4 +76,4 @@ const navigate = useNavigate(); // <-- 2. السطر الناقص الثاني �
 export default Login;
 
 
-//finish
+//finish.
