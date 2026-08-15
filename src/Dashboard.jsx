@@ -1,9 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
-
+import { requestPermissionAndGetToken, onForegroundMessage } from './firebase'; // استيراد دوال الإشعارات
 
 function Dashboard() {
+
+  useEffect(() => {
+    // 1. طلب الإذن وجلب الـ FCM Token عند دخول الداشبورد
+    const setupFCM = async () => {
+      const token = await requestPermissionAndGetToken();
+      if (token) {
+        console.log("Token to send to Laravel:", token);
+        
+        // TODO: هنا يمكنك إرسال الـ token إلى سيرفر Laravel عبر طلب POST
+        // مثال:
+        // axios.post('http://127.0.0.1:8000/api/save-token', { fcm_token: token }, {
+        //   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+        // });
+      }
+    };
+
+    setupFCM();
+
+    // 2. تشغيل مستمع الإشعارات المباشرة والتطبيق مفتوح
+    onForegroundMessage();
+  }, []);
+
   return (
     <div className="dashboard-layout" dir="rtl">
       
@@ -15,17 +37,16 @@ function Dashboard() {
           <p>نظام إدارة العيادة</p>
         </div>
         <nav className="sidebar-nav">
-         <ul>
-    {/* نستخدم Link لتفعيل التنقل السريع */}
-    <li><Link to="/dashboard">لوحة القيادة</Link></li>
-    <li><Link to="/appointments">المواعيد</Link></li>
-    <li><Link to="/patient-history">المرضى</Link></li>
-    <li><Link to="/records">السجل الطبي</Link></li>
-    <li><Link to="/prescriptions">الوصفات</Link></li>
-    <li><Link to="/lab">المختبر</Link></li>
-    <li><Link to="/messages">الرسائل</Link></li>
-    <li><Link to="/profile">الملف الشخصي</Link></li>
-  </ul>
+          <ul>
+            <li><Link to="/dashboard">لوحة القيادة</Link></li>
+            <li><Link to="/appointments">المواعيد</Link></li>
+            <li><Link to="/patient-history">المرضى</Link></li>
+            <li><Link to="/records">السجل الطبي</Link></li>
+            <li><Link to="/prescriptions">الوصفات</Link></li>
+            <li><Link to="/lab">المختبر</Link></li>
+            <li><Link to="/messages">الرسائل</Link></li>
+            <li><Link to="/profile">الملف الشخصي</Link></li>
+          </ul>
         </nav>
       </aside>
 
@@ -42,7 +63,6 @@ function Dashboard() {
           </div>
           <div className="header-left">
             <button className="add-appointment-btn">+ إضافة موعد</button>
-            {/* أيقونات التنبيهات والبروفايل ستكون هنا */}
           </div>
         </header>
 
@@ -68,8 +88,6 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* هنا سنكمل لاحقاً إضافة المخطط البياني والنشاط الأخير */}
-          
         </div>
       </main>
 

@@ -303,7 +303,7 @@ function Prescriptions() {
           {/* الأزرار المعدلة: حفظ جديد، تعديل، حذف، وإلغاء */}
           <div className="action-buttons-container" style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
             {!currentPrescriptionId ? (
-              <button className="save-print-btn" onClick={handleCreate} disabled={isLoading} style={{backgroundColor: '#007bff', color: 'white', padding: '10px 20px', border: 'none', cursor: 'pointer'}}>
+              <button className="save-print-btn" onClick={handleCreate} disabled={isLoading} style={{backgroundColor: '#00796b', color: 'white', padding: '10px 20px', border: 'none', cursor: 'pointer'}}>
                 {isLoading ? 'جاري الحفظ...' : '💾 حفظ روشتة جديدة'}
               </button>
             ) : (

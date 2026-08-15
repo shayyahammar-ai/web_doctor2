@@ -1,29 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
-import Dashboard from './Dashboard'; // سنقوم بإنشاء هذا الملف الآن
-import Appointments from './Appointments'; // استيراد الصفحة الجديدة
-import PatientHistory from './PatientHistory'; // 1. استيراد الواجهة الجديدة
-import MedicalRecords from './MedicalRecords'; // 1. استيراد واجهة السجل الطبي
-import Prescriptions from './Prescriptions'; // 1. استيراد واجهة الوصفات
-import LabRequest from './LabRequest'; // 1. استيراد واجهة المختبر
-import Messages from './Messages'; // 1. استيراد واجهة الرسائل
-import Profile from './Profile'; // 1. استيراد واجهة الملف الشخصي
+import Dashboard from './Dashboard';
+import Appointments from './Appointments';
+import PatientHistory from './PatientHistory';
+import MedicalRecords from './MedicalRecords';
+import Prescriptions from './Prescriptions';
+import LabRequest from './LabRequest';
+import Messages from './Messages';
+import Profile from './Profile';
+import { requestPermissionAndGetToken, onForegroundMessage } from './firebase'; // استيراد دوال الفايربيس للإشعارات
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    // طلب الإذن وجلب التوكن عند أول تحميل للتطبيق
+    requestPermissionAndGetToken();
+
+    // تشغيل مستمع الإشعارات والتطبيق مفتوح
+    onForegroundMessage();
+  }, []);
+
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/appointments" element={<Appointments />} /> {/* المسار الجديد */}
-        <Route path="/patient-history" element={<PatientHistory />} /> {/* 2. المسار الجديد */}
-        <Route path="/records" element={<MedicalRecords />} /> {/* 2. المسار الجديد */}
-        <Route path="/prescriptions" element={<Prescriptions />} /> {/* 2. المسار الجديد */}
-        <Route path="/lab" element={<LabRequest />} /> {/* 2. المسار الجديد */}
-        <Route path="/messages" element={<Messages />} /> {/* 2. المسار الجديد */}
-        <Route path="/profile" element={<Profile />} /> {/* 2. المسار الجديد */}
+        <Route path="/appointments" element={<Appointments />} />
+        <Route path="/patient-history" element={<PatientHistory />} />
+        <Route path="/records" element={<MedicalRecords />} />
+        <Route path="/prescriptions" element={<Prescriptions />} />
+        <Route path="/lab" element={<LabRequest />} />
+        <Route path="/messages" element={<Messages />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );
