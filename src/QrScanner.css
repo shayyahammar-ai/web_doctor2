@@ -1,0 +1,138 @@
+.qr-scanner-page {
+  min-height: 100vh;
+  background-color: #f4f7f6;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.qr-container {
+  width: 100%;
+  max-width: 900px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 30px;
+  overflow: hidden;
+}
+
+.qr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #eef2f5;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.qr-header h2 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.5rem;
+}
+
+.scanner-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.scanner-section p {
+  color: #7f8c8d;
+  margin-bottom: 15px;
+}
+
+/* تعديل عرض كاميرا الـ QR */
+#reader {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  border: 2px solid #3498db;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#reader__dashboard_section_csr span {
+  color: #e74c3c !important; /* لون رسائل خطأ الكاميرا الداخلية */
+}
+
+/* تنسيقات الإضبارة */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-header h3 {
+  color: #2ecc71;
+  margin: 0;
+}
+
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.profile-card {
+  background-color: #f8f9fa;
+  border: 1px solid #eef2f5;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.profile-card h4 {
+  margin-top: 0;
+  color: #34495e;
+  border-bottom: 2px solid #eef2f5;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.profile-card ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-card li {
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-size: 1.05rem;
+}
+
+.profile-card li strong {
+  color: #7f8c8d;
+  margin-left: 5px;
+}
+
+.blood-badge {
+  background-color: #e74c3c;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+}
+
+.retry-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.retry-btn:hover {
+  background-color: #2980b9;
+}
+
+@media (max-width: 768px) {
+  .profile-grid {
+    grid-template-columns: 1fr; /* عرض البطاقات فوق بعضها في الموبايل */
+  }
+}

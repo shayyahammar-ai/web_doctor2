@@ -39,7 +39,7 @@ const navigate = useNavigate(); // <-- 2. السطر الناقص الثاني �
         {/* الصورة من مجلد public */}
         <img src="/logo.png" alt="Clinico Logo" className="logo" />
         
-        <h2>عيادة بلس</h2>
+        <h2>عيادة </h2>
         <p className="subtitle">تسجيل الدخول إلى لوحة التحكم</p>
 
   <form onSubmit={handleSubmit}>

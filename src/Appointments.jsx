@@ -28,7 +28,7 @@ function Appointments() {
       setLoading(true);
       const token = localStorage.getItem('token'); // التوكن المحفوظ عند التسجيل
 
-      const response = await axios.get('http://127.0.0.1:8000/doctor/today-appointments', {
+      const response = await axios.get('https://api-shayyah.abukm.com/api/doctor/today-appointments', {
         headers: {
           Authorization: `Bearer ${token}`,
           Accept: 'application/json',
@@ -172,12 +172,12 @@ function Appointments() {
                           {item.patient?.name ? item.patient.name.charAt(0) : '👤'}
                         </div>
                         <div>
-                          <strong>{item.patient?.name || item.patient_name || 'مريض'}</strong>
-                          <span>ID: #P-{item.patient_id || item.id}</span>
+                          <strong>{item.patient?.name || item.full_name || 'مريض'}</strong>
+                          <span>Date:  {item.appointment_date || item.id}</span>
                         </div>
                       </td>
-                      <td>{item.appointment_time || item.time || '--:--'}</td>
-                      <td>{item.appointment_type || item.type || 'استشارة'}</td>
+                      <td>{item.start_time || item.time || '--:--'}</td>
+                      <td>{item.notes || item.type || 'استشارة'}</td>
                       <td>{renderStatusBadge(item.status || activeTab)}</td>
                       <td>
                         <button className="action-btn">📁</button>

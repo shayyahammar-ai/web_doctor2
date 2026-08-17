@@ -4,13 +4,14 @@ import Login from './Login';
 import Dashboard from './Dashboard';
 import Appointments from './Appointments';
 import PatientHistory from './PatientHistory';
-import MedicalRecords from './MedicalRecords';
 import Prescriptions from './Prescriptions';
 import LabRequest from './LabRequest';
 import Messages from './Messages';
 import Profile from './Profile';
 import { requestPermissionAndGetToken, onForegroundMessage } from './firebase'; // استيراد دوال الفايربيس للإشعارات
+import Notifications from './Notifications'; // استيراد صفحة الإشعارات
 import './App.css';
+import QrScanner from './QrScanner';
 
 function App() {
   useEffect(() => {
@@ -28,12 +29,13 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/appointments" element={<Appointments />} />
         <Route path="/patient-history" element={<PatientHistory />} />
-        <Route path="/records" element={<MedicalRecords />} />
         <Route path="/prescriptions" element={<Prescriptions />} />
         <Route path="/lab" element={<LabRequest />} />
         <Route path="/messages" element={<Messages />} />
         <Route path="/profile" element={<Profile />} />
-      </Routes>
+        <Route path="/qr-scanner" element={<QrScanner />} />
+        <Route path="/qr-scanner" element={<div style={{ height: '100vh', backgroundColor: 'white' }}></div>} />
+        <Route path="/notifications" element={<Notifications />} />      </Routes>
     </Router>
   );
 }
